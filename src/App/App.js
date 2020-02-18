@@ -10,7 +10,7 @@ import config from '../config';
 import './App.css';
 import AddFolder from '../AddFolder/AddFolder'
 import AddNote from '../AddNote/AddNote'
-// import AddNote from './AddNote/AddNote'
+import Errorboundary from '../Errorboundary'
 
 class App extends Component {
     state = {
@@ -59,17 +59,19 @@ class App extends Component {
     renderNavRoutes() {
         return (
             <>
-                {['/', '/folder/:folderId'].map(path => (
-                    <Route
-                        exact
-                        key={path}
-                        path={path}
-                        component={NoteListNav}
-                    />
-                ))}
-                <Route path="/note/:noteId" component={NotePageNav} />
-                <Route path="/add-folder" component={NotePageNav} />
-                <Route path="/add-note" component={NotePageNav} />
+                <Errorboundary> 
+                    {['/', '/folder/:folderId'].map(path => (
+                        <Route
+                            exact
+                            key={path}
+                            path={path}
+                            component={NoteListNav}
+                        />
+                    ))}
+                    <Route path="/note/:noteId" component={NotePageNav} />
+                    <Route path="/add-folder" component={NotePageNav} />
+                    <Route path="/add-note" component={NotePageNav} />
+                </ Errorboundary>
             </>
         );
     }
@@ -77,17 +79,19 @@ class App extends Component {
     renderMainRoutes() {
         return (
             <>
-                {['/', '/folder/:folderId'].map(path => (
-                    <Route
-                        exact
-                        key={path}
-                        path={path}
-                        component={NoteListMain}
-                    />
-                ))}
-                <Route path="/note/:noteId" component={NotePageMain} />
-                <Route path="/add-folder" component={AddFolder} />
-                <Route path='/add-note' component={AddNote} />
+                <Errorboundary> 
+                    {['/', '/folder/:folderId'].map(path => (
+                        <Route
+                            exact
+                            key={path}
+                            path={path}
+                            component={NoteListMain}
+                        />
+                    ))}
+                    <Route path="/note/:noteId" component={NotePageMain} />
+                    <Route path="/add-folder" component={AddFolder} />
+                    <Route path='/add-note' component={AddNote} />
+                </ Errorboundary>  
             </>
         );
     }
